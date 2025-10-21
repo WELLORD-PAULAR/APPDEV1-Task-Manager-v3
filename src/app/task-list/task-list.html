@@ -1,1 +1,71 @@
-<p>task-list works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-center mb-4">
+    <div class="btn-group" role="group" aria-label="Task filter options">
+      <button
+        type="button"
+        class="btn"
+        [class.btn-primary]="currentFilter() === 'all'"
+        [class.btn-outline-primary]="currentFilter() !== 'all'"
+        (click)="setFilter('all')">
+        All Tasks
+      </button>
+      <button
+        type="button"
+        class="btn"
+        [class.btn-primary]="currentFilter() === 'completed'"
+        [class.btn-outline-primary]="currentFilter() !== 'completed'"
+        (click)="setFilter('completed')">
+        Completed
+      </button>
+      <button
+        type="button"
+        class="btn"
+        [class.btn-primary]="currentFilter() === 'pending'"
+        [class.btn-outline-primary]="currentFilter() !== 'pending'"
+        (click)="setFilter('pending')">
+        Pending
+      </button>
+    </div>
+  </div>
+  <div class="list-group">
+
+    @for (task of tasks(); track task.id) {
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center flex-grow-1 gap-3">
+          <button
+            class="btn btn-outline-success btn-sm task-toggle"
+            [class.btn-success]="task.isCompleted"
+            (click)="toggleCompletion(task.id, $event)"
+            [attr.aria-label]="task.isCompleted ? 'Mark as incomplete' : 'Mark as complete'">
+            <i class="bi" [class.bi-check-circle-fill]="task.isCompleted" [class.bi-circle]="!task.isCompleted"></i>
+          </button>
+          <div class="flex-grow-1">
+            @if (editingTaskId === task.id) {
+              <input
+                type="text"
+                class="form-control"
+                [(ngModel)]="editedDescription"
+                (keyup.enter)="saveEdit(task)"
+                (blur)="saveEdit(task)"
+                autofocus>
+            } @else {
+              <span
+                class="task-description"
+                [class.text-decoration-line-through]="task.isCompleted"
+                (click)="startEditing(task)">
+                {{ task.description }}
+              </span>
+            }
+          </div>
+        </div>
+        <small class="text-muted ms-2">
+          {{ task.createdAt | date:'short' }}
+        </small>
+      </div>
+    } @empty {
+      <div class="list-group-item text-center text-muted">
+        No tasks found
+      </div>
+    }
+  </div>
+</div>

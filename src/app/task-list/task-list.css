@@ -1,0 +1,46 @@
+.task-description {
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 4px;
+  display: block;
+}
+
+.task-description:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.text-decoration-line-through {
+  color: #6c757d;
+}
+
+.task-toggle {
+  width: 38px;
+  height: 38px;
+  padding: 6px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease-in-out;
+}
+
+.task-toggle:hover {
+  transform: scale(1.1);
+}
+
+.task-toggle .bi {
+  font-size: 1.2rem;
+}
+
+.btn-group {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-group .btn {
+  min-width: 100px;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-group .btn:hover {
+  transform: translateY(-1px);
+}

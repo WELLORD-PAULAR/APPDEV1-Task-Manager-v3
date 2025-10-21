@@ -35,5 +35,9 @@ export class TaskService {
     this.currentFilter.set(filter);
   }
 
-  
+  toggleTaskCompletion(taskId: number) {
+    this.tasks.update(tasks => tasks.map(task =>
+      task.id === taskId ? { ...task, isCompleted: !task.isCompleted } : task
+    ));
+  }
 }
